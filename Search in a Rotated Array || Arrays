@@ -1,0 +1,64 @@
+//{ Driver Code Starts
+#include <bits/stdc++.h>
+using namespace std;
+
+// } Driver Code Ends
+
+int getPivot(int array[], int n){
+    
+    int e = n-1 , s=0;
+    int mid = 0;
+    while(s<e){
+        mid= s+(e-s)/2;
+        
+        if(array[mid]>=array[0]){
+            s=mid+1;
+           // cout << " s in condn if: " << s << endl;
+        }
+        else{
+            e=mid;
+            //cout << " e in condn else : " << e << endl;
+ 
+        }
+    }
+   // cout << " e is " << e <<  " and s is "<< s << endl ;
+    return e;
+}
+int binarySearch(int v[], int s , int e , int target){
+    while(s <= e){
+         int mid = s + (e - s)/2 ;
+         if(v[mid] == target ){
+             return mid;
+         }
+         if( v[mid] <= target){
+             s = mid+1;
+         }
+         else {
+             e = mid - 1;
+             
+         }
+    }    
+    return -1;
+}
+ 
+    
+
+class Solution{
+    public:
+    int search(int nums[], int l, int h, int key){
+        int n = h + 1;
+     //   cout << "n is: " << n << endl ;
+        int pivot = getPivot(nums,n);
+      //  cout<< "pivot is " << pivot << endl ;
+        if(nums[pivot] <= key && key <= nums[h]){
+            return binarySearch(nums, pivot, h , key);
+        }
+        else {
+            return binarySearch( nums, l , pivot - 1, key );
+        }
+        // l: The starting index
+        // h: The ending index, you have to search the key in this range
+        
+        //complete the function here
+    }
+};
